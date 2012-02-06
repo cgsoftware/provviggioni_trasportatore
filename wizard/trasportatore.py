@@ -39,17 +39,19 @@ class tempstatistiche_trasporti(osv.osv):
         ok = self._pulisci(cr, uid, context)
         #lista_id = self.mappa_categoria(cr, uid, parametri, context)
         testa = self.pool.get('fiscaldoc.header')
-        
+        lista_causali_escluse=[]
+        #import pdb;pdb.set_trace()
+        if parametri.causale_ids:
+         for causale in parametri.causale_ids:
+            lista_causali_escluse.append( causale.causale.id)
+            
         filtro_data = [('data_documento','<=', parametri.adata),('data_documento','>=', parametri.dadata)]
         testate_ids = testa.search(cr, uid, filtro_data)
         lista_id = []
         #import pdb;pdb.set_trace()
         if testate_ids:
             for rec_testa in testa.browse(cr, uid, testate_ids):
-                if parametri.causale_ids:
-                 for causale in parametri.causale_ids:
-                    
-                  if not causale.causale.id == rec_testa.tipo_doc.id:
+              if not rec_testa.tipo_doc.id in lista_causali_escluse:
                   #import pdb;pdb.set_trace()
                    if rec_testa.vettore.id == parametri.carrier.id:
                     #cerca = [('id','=',rec_testa.id)]
@@ -170,8 +172,8 @@ class tempstatistiche_trasporti(osv.osv):
                                                        'zona':rec_testa.partner_indcons_id.city        
                                                        }
                                                 ok = self.create(cr,uid,rigawr)
-                else:
-                    raise osv.except_osv(_('ERRORE !'), _('ESCLUDERE ALMENO UNA CAUSALE DOCUMENTO'))                                
+
+                                                    
         return
                         
                             
