@@ -22,12 +22,16 @@ class tempstatistiche_colli_trasporti(osv.osv):
         testa = self.pool.get('fiscaldoc.header')
         filtro_data = [('data_documento','<=', parametri.adata),('data_documento','>=', parametri.dadata)]
         testate_ids = testa.search(cr, uid, filtro_data)
+        lista_causali_escluse=[]
         if not parametri.documenti_ids:
             raise osv.except_osv(_('ERRORE !'), _('ESCLUDERE ALMENO UNA CAUSALE DOCUMENTO'))
+        else:
+         for causale in parametri.documenti_ids:
+            lista_causali_escluse.append( causale.causale.id)
+        import pdb;pdb.set_trace()    
         if testate_ids:
             for rec_testa in testa.browse(cr, uid, testate_ids):
-                for causale in parametri.documenti_ids:
-                 if not causale.causale.id == rec_testa.tipo_doc.id: 
+                 if not rec_testa.tipo_doc.id in lista_causali_escluse: 
                    if rec_testa.vettore.id == parametri.carrier.id:
                     cerca = [('name','=',rec_testa.id)]
                     id_temp = self.search(cr,uid,cerca)
@@ -91,7 +95,7 @@ class parcalcolo_colli(osv.osv_memory):
         #fatture = pool.get('fiscaldoc.header')
         active_ids = context and context.get('active_ids', [])
         Primo = True
-        #import pdb;pdb.set_trace()
+        #
         return {'type': 'ir.actions.report.xml',
                 'report_name': 'collitrasportatore',
                 'datas': data,
