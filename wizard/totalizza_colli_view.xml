@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_totalizza_colli" model="ir.ui.view">
+            <field name="name">genera.stampa.totalecolli</field>
+            <field name="model">parcalcolo.colli</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string='Parametri di Importazione dati' >
+                    <group col="6" colspan="6">
+                        <field name="dadata" colspan="4" />
+                        <field name="adata" colspan="4" />
+                        <field name="carrier" colspan="4"/>
+                        <newline/>
+                    </group>
+                        <group>
+                            <field name="documenti_ids" colspan="2" mode="tree"  nolabel="1" widget="one2many_list" width="300" height="200">
+                                <tree string="Causali" editable="bottom">
+                                    <field  name="causale" />
+                                </tree>
+                            </field>
+                        </group>
+                    <newline/>
+                        <group colspan="2" col="4">
+                            <button special="cancel" string="Cancel"  icon="gtk-cancel"/>
+                            <button name="crea_temp_colli" string="Stampa" type="object" icon="gtk-print"/>
+                        </group>
+                </form>
+            </field>
+        </record>
+        
+        <act_window name="Stampa totale colli per trasportatore"
+            res_model="parcalcolo.colli"
+            src_model="parcalcolo.colli"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_totalizza_colli"/>
+        
+        <menuitem action="action_totalizza_colli" 
+            icon = 'STOCK_JUSTIFY_FILL'
+            name='Stampa totale colli per trasportatore'
+            id="menu_trasporti_colli" 
+            parent="Reportistica.menu_stampe_vendite"  sequence="5"/>
+    </data>
+</openerp>
+        

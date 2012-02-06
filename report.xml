@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<openerp>
+<data >
+	
+        <record id="report_provviggioni" model="ir.actions.report.xml">
+                <field name="name">Provviggioni Vettore</field>
+                <field name="type">ir.actions.report.xml</field>
+                <field name="model">fiscaldoc.header</field>
+                <field name="report_name">trasportatore</field>
+                <field name="report_rml">provviggioni_trasportatore/report/trasportatore.jrxml</field>
+                <field name="report_type">pdf</field>
+                <field name="jasper_report">True</field>
+                <field name="jasper_output">pdf</field>
+        </record>
+        
+        <record id="report_totale_colli" model="ir.actions.report.xml">
+                <field name="name">Totale Colli Vettore</field>
+                <field name="type">ir.actions.report.xml</field>
+                <field name="model">fiscaldoc.header</field>
+                <field name="report_name">collitrasportatore</field>
+                <field name="report_rml">provviggioni_trasportatore/report/totalecolli.jrxml</field>
+                <field name="report_type">pdf</field>
+                <field name="jasper_report">True</field>
+                <field name="jasper_output">pdf</field>
+        </record>
+	
+ </data>
+</openerp>

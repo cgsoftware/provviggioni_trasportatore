@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_tempstatistiche_trasporti","tempstatistiche.trasporti","model_tempstatistiche_trasporti",,1,1,1,1
+"access_tempstatistiche_colli_trasporti","tempstatistiche.colli.trasporti","model_tempstatistiche_colli_trasporti",,1,1,1,1
