@@ -43,7 +43,7 @@ class tempstatistiche_trasporti(osv.osv):
         filtro_data = [('data_documento','<=', parametri.adata),('data_documento','>=', parametri.dadata)]
         testate_ids = testa.search(cr, uid, filtro_data)
         lista_id = []
-        import pdb;pdb.set_trace()
+        #import pdb;pdb.set_trace()
         if testate_ids:
             for rec_testa in testa.browse(cr, uid, testate_ids):
                 if parametri.causale_ids:
